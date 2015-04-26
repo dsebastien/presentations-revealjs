@@ -1,8 +1,10 @@
 # dSebastien's reveal.js presentations template
 
 ## About
-This is a simple template and build script for modern presentations based on [Reveal.js](http://lab.hakim.se/reveal-js/).
 
+This is a simple to use template for creating [Reveal.js](http://lab.hakim.se/reveal-js/) presentations using Markdown alone that comes along with a useful build script.
+
+Using it you can:
 * Create your slide deck using markdown alone
 * Edit your metadata in a single configuration file
 * Tweak Reveal.JS as you wish in the provided template
@@ -38,6 +40,7 @@ Note that all entries having a key ending with '_comment' in the config file jus
 You can also adapt the template file and refer to custom placeholders within.
 
 Finally, if you wish to customize the template or the options of Reveal.js, then you can edit the 'presentation/template.html' file. Reference for Reveal.js options: https://github.com/hakimel/reveal.js#configuration
+By customizing the template, nothing prevents you from adding slides using HTML; this is useful when you want to benefit from all Reveal.js's capabilities.
 
 ## Dependencies
 * reveal.js: the reveal.js library
