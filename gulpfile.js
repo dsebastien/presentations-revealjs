@@ -3,23 +3,25 @@
 // Include Gulp & tools we'll use
 var gulp = require('gulp-help')(require('gulp')); // note that gulp-help is loaded first: https://www.npmjs.com/package/gulp-help/
 var $ = require('gulp-load-plugins')(); // https://www.npmjs.com/package/gulp-load-plugins
+var gulpNpmFiles = require('gulp-npm-files');
+var gulpNpmFiles = require('gulp-npm-files');
 var runSequence = require('run-sequence');
 var del = require('del');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var fs = require('fs');
+var gulpFilter = require('gulp-filter');
 
 var markdown = require('./node_modules/reveal.js/plugin/markdown/markdown.js');
 
 // Config
 var tempFolder = './.tmp';
-var templateFolder = './template';
-var templateFile = templateFolder + '/index.html';
 var presentationFolder = './presentation';
 var mainSlidesFile = presentationFolder + '/main.md';
+var templateFile = presentationFolder + '/template.html';
+var presentationConfigFile = presentationFolder + '/config.json';
 var slideDeckFile = 'slides.md';
 var presentationFile = 'slides.html';
-var presentationConfigFile = presentationFolder + '/config.json';
 var buildFolder = './dist';
 var template = fs.readFileSync(templateFile, 'utf8');
 var placeHolderPrefix='{{';
@@ -42,14 +44,34 @@ function replaceAll(search, replacement, str) {
 
 gulp.task('clean', 'Clean output directories', del.bind(null, ['.tmp/*', 'dist/*', '!dist/.git'], {dot: true}));
 
-gulp.task('copy', 'Copy the template files and presentation assets', function () {
+gulp.task('copyNpmDependencies', 'Copy NPM dependencies to the temp build folder', function() {
+	var filter = gulpFilter(['**/reveal.js/LICENSE', '**/reveal.js/css/**/*.css', '**/reveal.js/{lib,plugin,js}/**/*.*']);
+	
+	return gulp.src(
+		gulpNpmFiles(), {base:'./'}
+	)
+	
+	// We filter in order to ignore files we don't care within the reveal.js package
+	.pipe(filter)
+  
+	// Only take changed files into account
+	.pipe($.changed(tempFolder, {}))
+  
+	// Copy files
+	.pipe(gulp.dest(tempFolder))
+  
+	// Task result
+	.pipe($.size({title: 'copyNpmDependencies'}));
+});
+
+gulp.task('copy', 'Copy the dependencies, template files and presentation assets', ['copyNpmDependencies'], function () {
   return gulp.src([
-	presentationFolder+ '/**/*',
+	presentationFolder + '/**/*',
 	'!' + presentationFolder + '/*.{md,json}', // the presentation and config file are processed separately
 	'!' + presentationFolder + '/assets/README.txt',
 	'!' + presentationFolder + '/.editorconfig', // dotfiles are ignored
-    templateFolder + '/**/*',
-	'!' + templateFile // the HTML template are processed separately
+	'!' + templateFile, // the HTML template are processed separately
+	tempFolder + '/node_modules/reveal.js/**/*'
   ], {
     dot: true
   })
@@ -88,36 +110,6 @@ gulp.task('convert-markdown', 'Convert the markdown code to Reveal.js HTML slide
 	// Display the files in the stream
 	//.pipe($.debug({title: 'Stream contents:', minimal: true}))
 	
-	// convert html to reveal.js slides
-	// code shamelessly taken from https://github.com/bmpvieira/gulp-reveal
-	// (and tweaked a bit)
-	
-	/*
-	.pipe($.change(function(content){
-		var slides = '';
-		content.split('\n<hr>\n').forEach(function (slide, i) {
-			var state = '';
-			if (slide.match(/<h2.*\?<\/h2>/)) {
-			  state = ' data-state=q';
-			} else if (slide.indexOf('<h2') !== -1) {
-			  state = ' data-state=title';
-			}
-			if (i === 0) {
-			  state = ' data-state=front';
-			}
-			slides = slides.concat(
-				'\n<section' + 
-				state + 
-				'>\n' + 
-				slide + 
-				'\n</section>\n'
-			);
-		});
-			
-		return slides;
-	}))
-	*/
-	
 	// Output files
     .pipe(gulp.dest(tempFolder))
 	
@@ -135,11 +127,7 @@ gulp.task('validate-config-file', 'Validate the presentation configuration file'
 	
 });
 
-gulp.task('watch', 'Watch the presentation for changes, automatically convert to HTML', function () {
-  gulp.watch(presentationFolder + '/*.{md,json}', ['default']);
-});
-
-gulp.task('serve', 'Watch the presentation for changes, automatically convert to HTML and display the results', ['default', 'watch'], function () {
+gulp.task('serve', 'Watch the presentation for changes, automatically convert to HTML and display the results', ['default'], function () {
 	browserSync({ // http://www.browsersync.io/docs/options/
 		notify: false,
 		// Run as an https by uncommenting 'https: true'
@@ -158,11 +146,18 @@ gulp.task('serve', 'Watch the presentation for changes, automatically convert to
 		}
 	});
 
+	gulp.watch(presentationFolder + '/*.{md,json,html}', ['build']);
 	gulp.watch([buildFolder + '/*.html'], reload); // html changes will force a reload
 });
 
 gulp.task('build', 'Build the presentation', ['convert-markdown', 'validate-config-file'], function () {
-	var presentationConfig = require(presentationConfigFile); // the config file is loaded here in order to always take changes into account
+	// the config file is loaded here in order to always take changes into account
+	//var presentationConfig = require(presentationConfigFile);
+	// this approach is necessary otherwise changes to the configuration files are not loaded during 'gulp serve'
+	var presentationConfig = fs.readFileSync(presentationConfigFile, 'utf8');
+	presentationConfig = JSON.parse(presentationConfig);
+	
+	console.log('configured theme: ' + presentationConfig.theme);
 	
 	return gulp.src([
 		tempFolder + '/*.html'

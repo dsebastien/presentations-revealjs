@@ -15,10 +15,10 @@
 	],
 	"version": "1.0.0",
 	"dependencies": {
+		"reveal.js": "3.0.0"
 	},
 	"devDependencies": {
 		"gulp": "3.8.11",
-		"reveal.js": "3.0.0",
 		"gulp-replace": "0.5.3",
 		"reveal-md": "0.0.18",
 		"del": "1.1.1",
@@ -30,7 +30,10 @@
 		"gulp-concat": "2.5.2",
 		"gulp-debug": "2.0.1",
 		"gulp-jsonlint": "1.0.2",
-		"gulp-rename": "^1.2.2",
+		"gulp-rename": "1.2.2",
+		"gulp-npm-files": "0.1.2",
+		"gulp-changed": "1.2.1",
+		"gulp-filter": "2.0.2",
 		"browser-sync": "2.5.3",
 		"run-sequence": "1.0.2"
 	},
@@ -48,7 +51,6 @@
 		"clean": "gulp clean",
 		"build": "gulp",
 		"debug": "reveal-md ./presentation/main.md --port 1337",
-		"watch": "gulp watch",
 		"serve": "gulp serve",
 		"help": "gulp help"
 	}

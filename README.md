@@ -1,4 +1,4 @@
-# dSebastien's presentations template
+# dSebastien's reveal.js presentations template
 
 ## About
 This is a simple template and build script for modern presentations based on [Reveal.js](http://lab.hakim.se/reveal-js/).
@@ -20,7 +20,6 @@ Check out the current [TODO list](TODO.md)
 * run 'npm run help' to get some help
 * run 'npm run debug' to quickly launch the presentation based on the Markdown contents (using reveal-md). This won't take your metadata and configuration into account. This option doesn't support multiple markdown files
 * run 'npm run build' to convert your presentation to HTML
-* run 'npm run watch' to watch your presentation for changes and automatically convert to HTML
 * run 'npm run serve' to watch your presentation for changes, automatically convert to HTML and display the results in your browser
 
 ## Options and customization
@@ -45,6 +44,9 @@ Finally, if you wish to customize the options of Reveal.js, then you need to edi
 * gulp-concat: concatenate files: https://www.npmjs.com/package/gulp-concat
 * gulp-jsonlint: validate JSON: https://www.npmjs.com/package/gulp-jsonlint
 * gulp-rename: rename files: https://www.npmjs.com/package/gulp-rename
+* gulp-npm-files: list package.json dependencies so that we can process them (e.g., copy them to the dist folder): https://www.npmjs.com/package/gulp-npm-files
+* gulp-changed: only pass through changed files: https://www.npmjs.com/package/gulp-changed
+* gulp-filter: filter vynil files in a stream: https://www.npmjs.com/package/gulp-filter
 
 ## Authors
 ### Sebastien Dubois

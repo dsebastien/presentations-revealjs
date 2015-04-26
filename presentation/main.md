@@ -2,6 +2,7 @@
 
 * Hello
 * World
+* Check out this cool [link](http://www.dsebastien.net)
 
 ---
 
@@ -15,8 +16,7 @@ Note: speaker notes come down here
 
 ## Slide 2.2
 
-* From beneath
-* Check out this cool [link](http://www.dsebastien.net)
+* Heya from beneath
 
 ---
 
