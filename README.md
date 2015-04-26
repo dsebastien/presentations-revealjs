@@ -3,9 +3,11 @@
 ## About
 This is a simple template and build script for modern presentations based on [Reveal.js](http://lab.hakim.se/reveal-js/).
 
-Create your slide deck using markdown, edit your metadata in a single configuration file and tweak Reveal.JS as you wish in the provided template.
-
-Use a few NPM commands to build your presentation and serve it to the world :)
+* Create your slide deck using markdown alone
+* Edit your metadata in a single configuration file
+* Tweak Reveal.JS as you wish in the provided template
+* Use a few NPM commands to build your presentation and serve it to the world
+* See the results live (thanks to [BrowserSync](http://www.browsersync.io/))
 
 ## Status & roadmap
 Check out the current [TODO list](TODO.md)

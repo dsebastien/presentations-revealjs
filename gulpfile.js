@@ -23,7 +23,6 @@ var presentationConfigFile = presentationFolder + '/config.json';
 var slideDeckFile = 'slides.md';
 var presentationFile = 'slides.html';
 var buildFolder = './dist';
-var template = fs.readFileSync(templateFile, 'utf8');
 var placeHolderPrefix='{{';
 var placeHolderSuffix='}}';
 var slidesPlaceHolder=placeHolderPrefix+'__slides__'+placeHolderSuffix;
@@ -164,8 +163,8 @@ gulp.task('build', 'Build the presentation', ['convert-markdown', 'validate-conf
 	])
 	
 	.pipe($.change(function(content){ // content represents a set of slides
-		// take the template as basis
-		var pageContents = "" + template;
+		// the template is loaded here in order to always take changes into account)
+		var pageContents = fs.readFileSync(templateFile, 'utf8');
 		
 		// replace all placeholders (title, description, author, ...)
 		var interpolatedContent = content;
