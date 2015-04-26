@@ -1,0 +1,55 @@
+{
+	"name": "presentations-revealjs",
+	"description": "dSebastien's template for presentations.",
+	"author": "Sebastien Dubois <seb@dsebastien.net> (http://www.dsebastien.net/)",
+	"contributors": [
+		"Sebastien Dubois <seb@dsebastien.net> (http://www.dsebastien.net/)"
+	],
+	"homepage": "http://www.dsebastien.net",
+	"keywords": [
+		"presentations",
+		"slides",
+		"reveal",
+		"reveal.js",
+		"markdown"
+	],
+	"version": "1.0.0",
+	"dependencies": {
+	},
+	"devDependencies": {
+		"gulp": "3.8.11",
+		"reveal.js": "3.0.0",
+		"gulp-replace": "0.5.3",
+		"reveal-md": "0.0.18",
+		"del": "1.1.1",
+		"gulp-load-plugins": "0.9.0",
+		"gulp-help": "1.3.4",
+		"gulp-size": "1.2.1",
+		"gulp-if": "1.2.5",
+		"gulp-change": "1.0.0",
+		"gulp-concat": "2.5.2",
+		"gulp-debug": "2.0.1",
+		"gulp-jsonlint": "1.0.2",
+		"gulp-rename": "^1.2.2",
+		"browser-sync": "2.5.3",
+		"run-sequence": "1.0.2"
+	},
+	"engines": {
+		"node": ">=0.12.2"
+	},
+	"private": true,
+	"license": "MIT",
+	"bugs": "https://github.com/dsebastien/presentations-revealjs/issues",
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:dsebastien/presentations-revealjs.git"
+	},
+	"scripts": {
+		"clean": "gulp clean",
+		"build": "gulp",
+		"debug": "reveal-md ./presentation/main.md --port 1337",
+		"watch": "gulp watch",
+		"serve": "gulp serve",
+		"help": "gulp help"
+	}
+}
