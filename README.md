@@ -14,19 +14,19 @@ Check out the current [TODO list](TODO.md)
 
 ## Usage
 * Clone the repository
-* Run 'npm install' to download all dependencies
+* Run `npm install` to download all dependencies
 * Edit the slide deck using markdown: presentation/main.md
   * you can create additional markdown (md) files and they'll get merged into a single slide deck
   * additional md files MUST start with --- (slide separator) otherwise the merge operation will not do what you want. The file names will dictate the order in which they're merged (i.e., follow a natural order in your filenames)
   * note that 'main.md' must exist and is always loaded first. All other files are appended to this one before all the markdown is converted to reveal.js HTML slides
   * use ---- to create slides beneath the current one
-* Run 'npm run debug' to quickly launch the presentation based on the Markdown contents using [reveal-md](https://github.com/webpro/reveal-md). 
+* Run `npm run debug` to quickly launch the presentation based on the Markdown contents using [reveal-md](https://github.com/webpro/reveal-md). 
   * note that the debug mode won't take your metadata and configuration into account.
   * moreover, the debug mode doesn't support multiple markdown files, it'll only take the main.md one into account
-* Run 'npm run build' to convert your presentation to HTML
-* Run 'npm run serve' to watch your presentation for changes, automatically convert to HTML and display the results in your browser
-* Run 'npm run clean' to clean all output directories
-* Run 'npm run help' to list all available commands
+* Run `npm run build` to convert your presentation to HTML
+* Run `npm run serve` to watch your presentation for changes, automatically convert to HTML and display the results in your browser
+* Run `npm run clean` to clean all output directories
+* Run `npm run help` to list all available commands
 
 ## Options and customization
 You can customize the options and metadata (e.g., deck title, author, description, theme, ...) by editing the 'presentation/config.json' file.
