@@ -1,14 +1,13 @@
 # {{title}}
 
-* Hello
-* World
+* Hello world!
 * Check out this cool [link](http://www.dsebastien.net)
 
 ---
 
 ## Slide 2
 
-> I quote...
+![cool](assets/open-source-logo.png "meh")
 
 Note: speaker notes come down here
 
@@ -21,6 +20,12 @@ Note: speaker notes come down here
 ---
 
 ## Slide 3
+
+> I quote...
+
+---
+
+## Slide 4
 
 I've also got some `code()`
 Even some code blocks:

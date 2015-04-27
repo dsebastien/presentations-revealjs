@@ -64,22 +64,28 @@ gulp.task('copyNpmDependencies', 'Copy NPM dependencies to the temp build folder
 });
 
 gulp.task('copy', 'Copy the dependencies, template files and presentation assets', ['copyNpmDependencies'], function () {
-  return gulp.src([
-	presentationFolder + '/**/*',
-	'!' + presentationFolder + '/*.{md,json}', // the presentation and config file are processed separately
-	'!' + presentationFolder + '/assets/README.txt',
-	'!' + presentationFolder + '/.editorconfig', // dotfiles are ignored
-	'!' + templateFile, // the HTML template are processed separately
-	tempFolder + '/node_modules/reveal.js/**/*'
-  ], {
-    dot: true
-  })
+	return gulp.src([
+		presentationFolder + '/**/*',
+		'!' + presentationFolder + '/*.{md,json}', // the presentation and config file are processed separately
+		'!' + presentationFolder + '/assets/README.txt',
+		'!' + presentationFolder + '/.editorconfig', // dotfiles are ignored
+		'!' + templateFile, // the HTML template are processed separately
+		tempFolder + '/node_modules/reveal.js/**/*'
+	], {
+		dot: true
+	})
+	  
+	// Only take changed files into account
+	.pipe($.changed(buildFolder, {}))
   
-  // Copy
-  .pipe(gulp.dest('dist'))
+	// Copy
+	.pipe(gulp.dest(buildFolder))
+	
+	// Force BrowserSync reload
+    .pipe(reload({stream: true, once: true}))
   
-  // Task result
-  .pipe($.size({title: 'copy'}));
+	// Task result
+	.pipe($.size({title: 'copy'}));
 });
 
 gulp.task('convert-markdown', 'Convert the markdown code to Reveal.js HTML slides', function () {
@@ -146,7 +152,8 @@ gulp.task('serve', 'Watch the presentation for changes, automatically convert to
 	});
 
 	gulp.watch(presentationFolder + '/*.{md,json,html}', ['build']);
-	gulp.watch([buildFolder + '/*.html'], reload); // html changes will force a reload
+	gulp.watch(presentationFolder + '/assets/**', ['copy']);
+	gulp.watch(buildFolder + '/*.html', reload); // changes will force a reload
 });
 
 gulp.task('build', 'Build the presentation', ['convert-markdown', 'validate-config-file'], function () {
@@ -155,8 +162,6 @@ gulp.task('build', 'Build the presentation', ['convert-markdown', 'validate-conf
 	// this approach is necessary otherwise changes to the configuration files are not loaded during 'gulp serve'
 	var presentationConfig = fs.readFileSync(presentationConfigFile, 'utf8');
 	presentationConfig = JSON.parse(presentationConfig);
-	
-	console.log('configured theme: ' + presentationConfig.theme);
 	
 	return gulp.src([
 		tempFolder + '/*.html'
@@ -210,5 +215,5 @@ gulp.task('build', 'Build the presentation', ['convert-markdown', 'validate-conf
 });
 
 gulp.task('default', 'Build production files', ['clean'], function (cb) {
-	runSequence('build', ['copy'], cb);
+	runSequence('copy', 'build', cb);
 });
