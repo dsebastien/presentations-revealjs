@@ -21,7 +21,7 @@ Check out the current [TODO list](TODO.md)
   * you can create additional markdown (md) files and they'll get merged into a single slide deck
   * additional md files MUST start with --- (slide separator) otherwise the merge operation will not do what you want. The file names will dictate the order in which they're merged (i.e., follow a natural order in your filenames)
   * note that 'main.md' must exist and is always loaded first. All other files are appended to this one before all the markdown is converted to reveal.js HTML slides
-  * use ---- to create slides beneath the current one
+  * for more details, check the edition section below
 * Run `npm run debug` to quickly launch the presentation based on the Markdown contents using [reveal-md](https://github.com/webpro/reveal-md). 
   * note that the debug mode won't take your metadata and configuration into account.
   * moreover, the debug mode doesn't support multiple markdown files, it'll only take the main.md one into account
@@ -41,6 +41,17 @@ You can also adapt the template file and refer to custom placeholders within.
 
 Finally, if you wish to customize the template or the options of Reveal.js, then you can edit the 'presentation/template.html' file. Reference for Reveal.js options: https://github.com/hakimel/reveal.js#configuration
 By customizing the template, nothing prevents you from adding slides using HTML; this is useful when you want to benefit from all Reveal.js's capabilities.
+
+## Edition
+Reveal.JS supports 'Common' Markdown, so just google Markdown to see what you can do :)
+There are only three Reveal.JS specific things that you should know/use:
+* use --- to mark the separation between slides (only needed before a slide, thus no need to put one at the end of the file
+* use ---- to state that the next slide should be placed below the current one
+* use note: to add speaker notes (don't ask me how these work, I don't use them)
+
+Note that Reveal.js's [fragments](https://github.com/hakimel/reveal.js#fragments) are also supported with Markdown:
+* https://github.com/hakimel/reveal.js#element-attributes
+* https://github.com/hakimel/reveal.js#slide-attributes
 
 ## Dependencies
 * reveal.js: the reveal.js library

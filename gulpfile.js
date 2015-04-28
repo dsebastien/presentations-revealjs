@@ -44,7 +44,7 @@ function replaceAll(search, replacement, str) {
 gulp.task('clean', 'Clean output directories', del.bind(null, ['.tmp/*', 'dist/*', '!dist/.git'], {dot: true}));
 
 gulp.task('copyNpmDependencies', 'Copy NPM dependencies to the temp build folder', function() {
-	var filter = gulpFilter(['**/reveal.js/LICENSE', '**/reveal.js/css/**/*.css', '**/reveal.js/{lib,plugin,js}/**/*.*']);
+	var filter = gulpFilter(['**/reveal.js/css/**/*.css', '**/reveal.js/{lib,plugin,js}/**/*.*']);
 	
 	return gulp.src(
 		gulpNpmFiles(), {base:'./'}
