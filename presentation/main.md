@@ -1,7 +1,7 @@
 # {{title}}
 
-* Hello world!
-* Check out this cool [link](http://www.dsebastien.net)
+* Hello world
+* Check out this cool [link](https://www.dsebastien.net)
 
 ---
 
@@ -42,5 +42,5 @@ var z = x * y;
 
 * Fragments
 <!-- .element: class="fragment" -->
-* also work
+* also works
 <!-- .element: class="fragment" -->
