@@ -16,7 +16,7 @@ Check out the current [TODO list](TODO.md)
 
 ## Usage
 * Clone the repository
-* Run `npm install` to download all dependencies
+* Run `npm install --no-optional` to download all dependencies
 * Edit the slide deck using markdown: presentation/main.md
   * you can create additional markdown (md) files and they'll get merged into a single slide deck
   * additional md files MUST start with --- (slide separator) otherwise the merge operation will not do what you want. The file names will dictate the order in which they're merged (i.e., follow a natural order in your filenames)
