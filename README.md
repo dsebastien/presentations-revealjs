@@ -1,5 +1,7 @@
 # dSebastien's reveal.js presentations template
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/dsebastien/presentations-revealjs.svg)](https://greenkeeper.io/)
+
 ## About
 
 This is a simple to use template for creating [Reveal.js](http://lab.hakim.se/reveal-js/) presentations using Markdown alone that comes along with a useful build script.
